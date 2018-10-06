@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure your application as:
 #
-#     config :assert_match, key: :value
+#     config :ex_unit_assert_match, key: :value
 #
 # and access this configuration in your application as:
 #
-#     Application.get_env(:assert_match, :key)
+#     Application.get_env(:ex_unit_assert_match, :key)
 #
 # You can also configure a 3rd-party app:
 #

@@ -1,21 +1,44 @@
-# AssertMatch
+# ExUnitAssertMatch
 
-**TODO: Add description**
+A package helps to assert that given data matches expected structure.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `assert_match` to your list of dependencies in `mix.exs`:
+Can be installed by adding `ex_unit_assert_match` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:assert_match, "~> 0.1.0"}
+    {:ex_unit_assert_match, "~> 0.1.0", only: :test}
   ]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/assert_match](https://hexdocs.pm/assert_match).
+## Usage
 
+```elixir
+defmodule SomeTest do
+  use ExUnit.Case
+  alias ExUnitAssertMatch, as: Match
+
+  test "match" do
+    expected = Match.map %{
+      name: Match.binary(),
+      age: Match.integer(),
+      height: Match.float(),
+      orgs: Match.list_of(Match.map %{
+        name: Match.binary(),
+      }),
+    }
+
+    Match.assert(expected, %{
+      name: "John Doe",
+      age: 28,
+      height: 172.5,
+      orgs: [%{
+        name: "GitHub",
+      }],
+    })
+  end
+end
+```

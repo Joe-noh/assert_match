@@ -1,9 +1,9 @@
-defmodule AssertMatch.MixProject do
+defmodule ExUnitAssertMatch.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :assert_match,
+      app: :ex_unit_assert_match,
       version: "0.1.0",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
