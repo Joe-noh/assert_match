@@ -7,32 +7,7 @@ defmodule AssertMatch do
   alias AssertMatch.Types
 
   def assert(left, right) do
-    case left do
-      %Types.Map{expected: nil} ->
-        ExUnit.Assertions.assert(is_map(right), "Expected #{inspect(right)} is map")
-
-      %Types.Map{expected: expected} ->
-        Enum.each(expected, fn {key, val} ->
-          AssertMatch.assert(val, Map.get(right, key))
-        end)
-
-      %Types.List{expected: nil} ->
-        ExUnit.Assertions.assert(is_list(right), "Expected #{inspect(right)} is list")
-
-      %Types.List{expected: expected} ->
-        Enum.each(right, fn elem ->
-          AssertMatch.assert(expected, elem)
-        end)
-
-      %Types.Binary{} ->
-        ExUnit.Assertions.assert(is_binary(right), "Expected #{inspect(right)} is binary")
-
-      %Types.Integer{} ->
-        ExUnit.Assertions.assert(is_integer(right), "Expected #{inspect(right)} is integer")
-
-      %Types.Float{} ->
-        ExUnit.Assertions.assert(is_float(right), "Expected #{inspect(right)} is float")
-    end
+    AssertMatch.Type.assert left, right
   end
 
   def map(expected) do
