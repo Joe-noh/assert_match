@@ -10,6 +10,10 @@ defmodule ExUnitAssertMatch do
     ExUnitAssertMatch.Type.assert(left, right)
   end
 
+  def map() do
+    %Types.Map{expected: nil}
+  end
+
   def map(expected) do
     %Types.Map{expected: expected}
   end
