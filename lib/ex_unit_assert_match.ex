@@ -1,13 +1,13 @@
-defmodule AssertMatch do
+defmodule ExUnitAssertMatch do
   @moduledoc """
-  Documentation for AssertMatch.
+  Documentation for ExUnitAssertMatch.
   """
 
   require ExUnit.Assertions
-  alias AssertMatch.Types
+  alias ExUnitAssertMatch.Types
 
   def assert(left, right) do
-    AssertMatch.Type.assert left, right
+    ExUnitAssertMatch.Type.assert(left, right)
   end
 
   def map(expected) do

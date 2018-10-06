@@ -1,8 +1,8 @@
-defmodule AssertMatch.Types.Binary do
+defmodule ExUnitAssertMatch.Types.Binary do
   defstruct []
 end
 
-defimpl AssertMatch.Type, for: AssertMatch.Types.Binary do
+defimpl ExUnitAssertMatch.Type, for: ExUnitAssertMatch.Types.Binary do
   require ExUnit.Assertions
 
   def assert(_type, data) do

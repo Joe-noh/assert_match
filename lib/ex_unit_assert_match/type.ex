@@ -1,4 +1,4 @@
-defprotocol AssertMatch.Type do
+defprotocol ExUnitAssertMatch.Type do
   @doc """
   Asserts given `data` match `expected_type`.
   """

@@ -1,8 +1,8 @@
-defmodule AssertMatch.Types.Float do
+defmodule ExUnitAssertMatch.Types.Float do
   defstruct []
 end
 
-defimpl AssertMatch.Type, for: AssertMatch.Types.Float do
+defimpl ExUnitAssertMatch.Type, for: ExUnitAssertMatch.Types.Float do
   require ExUnit.Assertions
 
   def assert(_type, data) do

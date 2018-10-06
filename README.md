@@ -1,15 +1,15 @@
-# AssertMatch
+# ExUnitAssertMatch
 
 A package helps to assert that given data matches expected structure.
 
 ## Installation
 
-Can be installed by adding `assert_match` to your list of dependencies in `mix.exs`:
+Can be installed by adding `ex_unit_assert_match` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:assert_match, "~> 0.1.0", only: :test}
+    {:ex_unit_assert_match, "~> 0.1.0", only: :test}
   ]
 end
 ```
@@ -19,7 +19,7 @@ end
 ```elixir
 defmodule SomeTest do
   use ExUnit.Case
-  alias AssertMatch, as: Match
+  alias ExUnitAssertMatch, as: Match
 
   test "match" do
     expected = Match.map %{
