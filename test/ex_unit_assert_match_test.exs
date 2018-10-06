@@ -1,21 +1,22 @@
 defmodule ExUnitAssertMatchTest do
   use ExUnit.Case
+  alias ExUnitAssertMatch, as: M
 
   test "integration" do
     expected =
-      ExUnitAssertMatch.map(%{
-        name: ExUnitAssertMatch.binary(),
-        age: ExUnitAssertMatch.integer(),
-        height: ExUnitAssertMatch.float(),
+      M.map(%{
+        name: M.binary(),
+        age: M.integer(),
+        height: M.float(),
         orgs:
-          ExUnitAssertMatch.list_of(
-            ExUnitAssertMatch.map(%{
-              name: ExUnitAssertMatch.binary()
+          M.list_of(
+            M.map(%{
+              name: M.binary()
             })
           )
       })
 
-    ExUnitAssertMatch.assert(expected, %{
+    M.assert(expected, %{
       name: "John Doe",
       age: 28,
       height: 172.5,
