@@ -1,4 +1,6 @@
 defmodule ExUnitAssertMatch.Types.Any do
+  @moduledoc false
+
   defstruct []
 end
 

@@ -1,28 +1,61 @@
 defmodule ExUnitAssertMatch.MixProject do
   use Mix.Project
 
+  @version "0.1.0"
+
   def project do
     [
       app: :ex_unit_assert_match,
-      version: "0.1.0",
+      name: "ExUnitAssertMatch",
+      version: @version,
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      description: description(),
+      package: package(),
+      deps: deps(),
+      source_url: github_url(),
+      docs: docs()
     ]
   end
 
-  # Run "mix help compile.app" to learn about applications.
   def application do
     [
       extra_applications: [:logger]
     ]
   end
 
-  # Run "mix help deps" to learn about dependencies.
+  defp description do
+    "A package helps to assert that given data match expected structure."
+  end
+
+  defp package do
+    [
+      name: "ex_unit_assert_match",
+      files: ~w(lib .formatter.exs mix.exs README.md LICENSE),
+      licenses: ["MIT"],
+      maintainers: ["Joe-noh"],
+      links: %{
+        "GitHub" => github_url()
+      }
+    ]
+  end
+
+  defp docs do
+    [
+      main: "readme",
+      source_ref: "v#{@version}",
+      source_url: github_url(),
+      extras: ["README.md"]
+    ]
+  end
+
+  defp github_url do
+    "https://github.com/Joe-noh/ex_unit_assert_match"
+  end
+
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
     ]
   end
 end
