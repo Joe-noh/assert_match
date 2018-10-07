@@ -23,19 +23,23 @@ defmodule SomeTest do
 
   test "match" do
     expected = Match.map %{
-      name: Match.binary(),
+      first_name: Match.binary(),
+      last_name: Match.any(),
       age: Match.integer(),
       height: Match.float(),
       orgs: Match.list_of(Match.map %{
+        id: Match.atom(),
         name: Match.binary(),
       }),
     }
 
     Match.assert(expected, %{
-      name: "John Doe",
+      first_name: "John",
+      last_name: "Doe",
       age: 28,
       height: 172.5,
       orgs: [%{
+        id: :github,
         name: "GitHub",
       }],
     })

@@ -10,19 +10,23 @@ defmodule ExUnitAssertMatch do
   end
 
   def map() do
-    %Types.Map{expected: nil}
+    %Types.Map{example: nil}
   end
 
-  def map(expected) do
-    %Types.Map{expected: expected}
+  def map(example) do
+    %Types.Map{example: example}
   end
 
   def list() do
-    %Types.List{expected: nil}
+    %Types.List{example: nil}
   end
 
-  def list_of(expected) do
-    %Types.List{expected: expected}
+  def list_of(example) do
+    %Types.List{example: example}
+  end
+
+  def atom() do
+    %Types.Atom{}
   end
 
   def binary() do
@@ -35,5 +39,9 @@ defmodule ExUnitAssertMatch do
 
   def float() do
     %Types.Float{}
+  end
+
+  def any() do
+    %Types.Any{}
   end
 end

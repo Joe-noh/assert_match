@@ -20,7 +20,7 @@ defmodule ExUnitAssertMatch.Types.ListTest do
 
   describe "with example" do
     setup do
-      type = %Types.List{expected: %Types.Binary{}}
+      type = %Types.List{example: %Types.Binary{}}
 
       %{type: type}
     end

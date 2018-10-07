@@ -1,5 +1,5 @@
 defmodule ExUnitAssertMatch.Types.List do
-  defstruct [:expected]
+  defstruct [:example]
 
   def assert_self(%__MODULE__{}, data, opts) do
     {assertion_module, _opts} = Keyword.pop(opts, :assertion_module, ExUnit.Assertions)
@@ -7,11 +7,11 @@ defmodule ExUnitAssertMatch.Types.List do
     data |> is_list() |> assertion_module.assert("Expected #{inspect(data)} is list")
   end
 
-  def assert_children(%__MODULE__{expected: nil}, _data, _opts) do
+  def assert_children(%__MODULE__{example: nil}, _data, _opts) do
   end
-  def assert_children(%__MODULE__{expected: expected}, data, opts) do
+  def assert_children(%__MODULE__{example: example}, data, opts) do
     Enum.each(data, fn elem ->
-      ExUnitAssertMatch.assert(expected, elem, opts)
+      ExUnitAssertMatch.assert(example, elem, opts)
     end)
   end
 end
