@@ -2,7 +2,11 @@ defmodule ExUnitAssertMatch.Types.Atom do
   defstruct []
 
   def assert_self(%__MODULE__{}, data, opts) do
-    data |> is_atom() |> opts.assertion_module.assert("Expected #{inspect(data)} is atom")
+    message = ExUnitAssertMatch.ErrorMessage.build("Expected #{inspect(data)} is atom", opts)
+
+    data
+    |> is_atom()
+    |> opts.assertion_module.assert(message)
   end
 end
 

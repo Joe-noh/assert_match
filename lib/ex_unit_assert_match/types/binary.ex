@@ -2,7 +2,11 @@ defmodule ExUnitAssertMatch.Types.Binary do
   defstruct []
 
   def assert_self(%__MODULE__{}, data, opts) do
-    data |> is_binary() |> opts.assertion_module.assert("Expected #{inspect(data)} is binary")
+    message = ExUnitAssertMatch.ErrorMessage.build("Expected #{inspect(data)} is binary", opts)
+
+    data
+    |> is_binary()
+    |> opts.assertion_module.assert(message)
   end
 end
 

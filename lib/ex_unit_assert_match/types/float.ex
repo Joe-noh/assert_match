@@ -2,7 +2,11 @@ defmodule ExUnitAssertMatch.Types.Float do
   defstruct []
 
   def assert_self(%__MODULE__{}, data, opts) do
-    data |> is_float() |> opts.assertion_module.assert("Expected #{inspect(data)} is float")
+    message = ExUnitAssertMatch.ErrorMessage.build("Expected #{inspect(data)} is float", opts)
+
+    data
+    |> is_float()
+    |> opts.assertion_module.assert(message)
   end
 end
 

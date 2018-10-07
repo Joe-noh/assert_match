@@ -2,7 +2,9 @@ defmodule ExUnitAssertMatch.Types.Literal do
   defstruct [:example]
 
   def assert_self(%__MODULE__{example: literal}, data, opts) do
-    opts.assertion_module.assert literal == data, "Expected #{data} is #{literal}"
+    message = ExUnitAssertMatch.ErrorMessage.build("Expected #{data} is #{literal}", opts)
+
+    opts.assertion_module.assert literal == data, message
   end
 end
 
