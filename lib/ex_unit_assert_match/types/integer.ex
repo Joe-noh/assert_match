@@ -1,11 +1,15 @@
 defmodule ExUnitAssertMatch.Types.Integer do
   defstruct []
+
+  def assert_self(%__MODULE__{}, data, opts) do
+    {assertion_module, _opts} = Keyword.pop(opts, :assertion_module, ExUnit.Assertions)
+
+    data |> is_integer() |> assertion_module.assert("Expected #{inspect(data)} is integer")
+  end
 end
 
 defimpl ExUnitAssertMatch.Type, for: ExUnitAssertMatch.Types.Integer do
-  @assertion_module Application.get_env(:ex_unit_assert_match, :assertion_module)
-
-  def assert(_type, data) do
-    @assertion_module.assert(is_integer(data), "Expected #{inspect(data)} is integer")
+  def assert(type, data, opts \\ []) do
+    ExUnitAssertMatch.Types.Integer.assert_self(type, data, opts)
   end
 end

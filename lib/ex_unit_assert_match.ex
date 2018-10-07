@@ -5,8 +5,8 @@ defmodule ExUnitAssertMatch do
 
   alias ExUnitAssertMatch.Types
 
-  def assert(left, right) do
-    ExUnitAssertMatch.Type.assert(left, right)
+  def assert(left, right, opts \\ []) do
+    ExUnitAssertMatch.Type.assert(left, right, opts)
   end
 
   def map() do
