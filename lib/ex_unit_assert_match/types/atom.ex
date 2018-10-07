@@ -1,4 +1,6 @@
 defmodule ExUnitAssertMatch.Types.Atom do
+  @moduledoc false
+
   defstruct []
 
   def assert_self(%__MODULE__{}, data, opts) do

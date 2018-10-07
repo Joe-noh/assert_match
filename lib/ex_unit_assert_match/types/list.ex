@@ -1,4 +1,6 @@
 defmodule ExUnitAssertMatch.Types.List do
+  @moduledoc false
+
   defstruct [:example]
 
   def assert_self(%__MODULE__{}, data, opts) do
