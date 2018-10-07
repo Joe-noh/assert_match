@@ -20,7 +20,7 @@ defmodule ExUnitAssertMatch.Types.MapTest do
 
   describe "with example" do
     setup do
-      type = %Types.Map{expected: %{
+      type = %Types.Map{example: %{
         name: %Types.Binary{}
       }}
 
