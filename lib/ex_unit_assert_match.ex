@@ -3,11 +3,10 @@ defmodule ExUnitAssertMatch do
   Documentation for ExUnitAssertMatch.
   """
 
-  require ExUnit.Assertions
   alias ExUnitAssertMatch.Types
 
-  def assert(left, right) do
-    ExUnitAssertMatch.Type.assert(left, right)
+  def assert(left, right, opts \\ []) do
+    ExUnitAssertMatch.Type.assert(left, right, opts)
   end
 
   def map() do
