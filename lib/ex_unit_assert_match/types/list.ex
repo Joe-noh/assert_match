@@ -2,9 +2,7 @@ defmodule ExUnitAssertMatch.Types.List do
   defstruct [:example]
 
   def assert_self(%__MODULE__{}, data, opts) do
-    {assertion_module, _opts} = Keyword.pop(opts, :assertion_module, ExUnit.Assertions)
-
-    data |> is_list() |> assertion_module.assert("Expected #{inspect(data)} is list")
+    data |> is_list() |> opts.assertion_module.assert("Expected #{inspect(data)} is list")
   end
 
   def assert_children(%__MODULE__{example: nil}, _data, _opts) do

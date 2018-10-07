@@ -2,9 +2,7 @@ defmodule ExUnitAssertMatch.Types.Map do
   defstruct [:example]
 
   def assert_self(%__MODULE__{}, data, opts) do
-    {assertion_module, _opts} = Keyword.pop(opts, :assertion_module, ExUnit.Assertions)
-
-    data |> is_map() |> assertion_module.assert("Expected #{inspect(data)} is map")
+    data |> is_map() |> opts.assertion_module.assert("Expected #{inspect(data)} is map")
   end
 
   def assert_children(%__MODULE__{example: nil}, _data, _opts) do
