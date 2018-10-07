@@ -1,5 +1,7 @@
 # ExUnitAssertMatch
 
+[![CircleCI](https://circleci.com/gh/Joe-noh/ex_unit_assert_match.svg?style=svg)](https://circleci.com/gh/Joe-noh/ex_unit_assert_match)
+
 A package helps to assert that given data matches expected structure.
 
 ## Installation
