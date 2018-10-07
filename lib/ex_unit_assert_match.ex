@@ -25,6 +25,10 @@ defmodule ExUnitAssertMatch do
     %Types.List{example: example}
   end
 
+  def atom() do
+    %Types.Atom{}
+  end
+
   def binary() do
     %Types.Binary{}
   end

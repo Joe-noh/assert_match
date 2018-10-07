@@ -12,6 +12,7 @@ defmodule ExUnitAssertMatchTest do
         orgs:
           M.list_of(
             M.map(%{
+              id: M.atom(),
               name: M.binary()
             })
           )
@@ -24,6 +25,7 @@ defmodule ExUnitAssertMatchTest do
       height: 172.5,
       orgs: [
         %{
+          id: :github,
           name: "GitHub"
         }
       ]

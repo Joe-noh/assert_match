@@ -28,6 +28,7 @@ defmodule SomeTest do
       age: Match.integer(),
       height: Match.float(),
       orgs: Match.list_of(Match.map %{
+        id: Match.atom(),
         name: Match.binary(),
       }),
     }
@@ -38,6 +39,7 @@ defmodule SomeTest do
       age: 28,
       height: 172.5,
       orgs: [%{
+        id: :github,
         name: "GitHub",
       }],
     })
