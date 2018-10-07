@@ -36,4 +36,8 @@ defmodule ExUnitAssertMatch do
   def float() do
     %Types.Float{}
   end
+
+  def any() do
+    %Types.Any{}
+  end
 end

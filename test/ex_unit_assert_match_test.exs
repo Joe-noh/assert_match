@@ -5,7 +5,8 @@ defmodule ExUnitAssertMatchTest do
   test "integration" do
     expected =
       M.map(%{
-        name: M.binary(),
+        first_name: M.binary(),
+        last_name: M.any(),
         age: M.integer(),
         height: M.float(),
         orgs:
@@ -17,7 +18,8 @@ defmodule ExUnitAssertMatchTest do
       })
 
     M.assert(expected, %{
-      name: "John Doe",
+      first_name: "John",
+      last_name: "Doe",
       age: 28,
       height: 172.5,
       orgs: [
