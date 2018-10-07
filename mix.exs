@@ -33,6 +33,7 @@ defmodule ExUnitAssertMatch.MixProject do
       name: "ex_unit_assert_match",
       files: ~w(lib .formatter.exs mix.exs README.md LICENSE),
       licenses: ["MIT"],
+      maintainers: ["Joe-noh"],
       links: %{
         "GitHub" => github_url()
       }
