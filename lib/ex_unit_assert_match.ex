@@ -1,6 +1,8 @@
 defmodule ExUnitAssertMatch do
   @moduledoc """
-  Documentation for ExUnitAssertMatch.
+  Provedes functionality to assert that given data structure is as expected.
+
+  The usage is on [README](./readme.html#usage).
   """
 
   alias ExUnitAssertMatch.Types
