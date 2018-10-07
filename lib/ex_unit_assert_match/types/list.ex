@@ -11,6 +11,7 @@ defmodule ExUnitAssertMatch.Types.List do
 
   def assert_children(%__MODULE__{example: nil}, _data, _opts) do
   end
+
   def assert_children(%__MODULE__{example: example}, data, opts) do
     data
     |> Enum.with_index()

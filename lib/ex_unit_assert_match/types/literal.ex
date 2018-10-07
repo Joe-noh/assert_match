@@ -4,7 +4,7 @@ defmodule ExUnitAssertMatch.Types.Literal do
   def assert_self(%__MODULE__{example: literal}, data, opts) do
     message = ExUnitAssertMatch.ErrorMessage.build("Expected #{data} is #{literal}", opts)
 
-    opts.assertion_module.assert literal == data, message
+    opts.assertion_module.assert(literal == data, message)
   end
 end
 

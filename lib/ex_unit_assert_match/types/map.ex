@@ -11,6 +11,7 @@ defmodule ExUnitAssertMatch.Types.Map do
 
   def assert_children(%__MODULE__{example: nil}, _data, _opts) do
   end
+
   def assert_children(%__MODULE__{example: example}, data, opts) do
     Enum.each(example, fn {key, val} ->
       opts = %ExUnitAssertMatch.Option{opts | key_stack: [key | opts.key_stack]}

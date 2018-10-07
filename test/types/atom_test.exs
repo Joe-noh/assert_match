@@ -10,7 +10,7 @@ defmodule ExUnitAssertMatch.Types.AtomTest do
   describe "assert" do
     test "pass if atom is given", %{type: type, opts: opts} do
       Type.assert(type, :atom, opts)
-      Type.assert(type, :'hello world', opts)
+      Type.assert(type, :"hello world", opts)
       Type.assert(type, Elixir, opts)
 
       opts = %Option{opts | assertion_module: ExUnitAssertMatch.ThrowTupleOnFail}
