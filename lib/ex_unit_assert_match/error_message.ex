@@ -15,10 +15,10 @@ defmodule ExUnitAssertMatch.ErrorMessage do
       |> Enum.map(&inspect/1)
       |> Enum.join(" > ")
 
-    ~s"
+    ~s"""
     #{message}
 
-    Key: #{path}
-    "
+    Path: #{path}
+    """
   end
 end
