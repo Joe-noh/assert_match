@@ -9,6 +9,7 @@ defmodule ExUnitAssertMatchTest do
         last_name: M.any(),
         age: M.integer(),
         height: M.float(),
+        shoe_size: M.literal(10.5),
         orgs:
           M.list_of(
             M.map(%{
@@ -23,6 +24,7 @@ defmodule ExUnitAssertMatchTest do
       last_name: "Doe",
       age: 28,
       height: 172.5,
+      shoe_size: 10.5,
       orgs: [
         %{
           id: :github,

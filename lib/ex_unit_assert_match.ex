@@ -5,8 +5,8 @@ defmodule ExUnitAssertMatch do
 
   alias ExUnitAssertMatch.Types
 
-  def assert(left, right, opts \\ []) do
-    ExUnitAssertMatch.Type.assert(left, right, opts)
+  def assert(type, data, opts \\ []) do
+    ExUnitAssertMatch.Type.assert(type, data, opts)
   end
 
   def map() do
@@ -39,6 +39,10 @@ defmodule ExUnitAssertMatch do
 
   def float() do
     %Types.Float{}
+  end
+
+  def literal(example) do
+    %Types.Literal{example: example}
   end
 
   def any() do
