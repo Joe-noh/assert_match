@@ -3,9 +3,9 @@ defmodule ExUnitAssertMatch.Types.Binary do
 end
 
 defimpl ExUnitAssertMatch.Type, for: ExUnitAssertMatch.Types.Binary do
-  require ExUnit.Assertions
+  @assertion_module Application.get_env(:ex_unit_assert_match, :assertion_module)
 
   def assert(_type, data) do
-    ExUnit.Assertions.assert(is_binary(data), "Expected #{inspect(data)} is binary")
+    @assertion_module.assert(is_binary(data), "Expected #{inspect(data)} is binary")
   end
 end

@@ -3,7 +3,6 @@ defmodule ExUnitAssertMatch do
   Documentation for ExUnitAssertMatch.
   """
 
-  require ExUnit.Assertions
   alias ExUnitAssertMatch.Types
 
   def assert(left, right) do

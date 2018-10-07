@@ -3,9 +3,9 @@ defmodule ExUnitAssertMatch.Types.Float do
 end
 
 defimpl ExUnitAssertMatch.Type, for: ExUnitAssertMatch.Types.Float do
-  require ExUnit.Assertions
+  @assertion_module Application.get_env(:ex_unit_assert_match, :assertion_module)
 
   def assert(_type, data) do
-    ExUnit.Assertions.assert(is_float(data), "Expected #{inspect(data)} is float")
+    @assertion_module.assert(is_float(data), "Expected #{inspect(data)} is float")
   end
 end
