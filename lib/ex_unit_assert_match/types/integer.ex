@@ -2,9 +2,11 @@ defmodule ExUnitAssertMatch.Types.Integer do
   defstruct []
 
   def assert_self(%__MODULE__{}, data, opts) do
-    {assertion_module, _opts} = Keyword.pop(opts, :assertion_module, ExUnit.Assertions)
+    message = ExUnitAssertMatch.ErrorMessage.build("Expected #{inspect(data)} is integer", opts)
 
-    data |> is_integer() |> assertion_module.assert("Expected #{inspect(data)} is integer")
+    data
+    |> is_integer()
+    |> opts.assertion_module.assert(message)
   end
 end
 

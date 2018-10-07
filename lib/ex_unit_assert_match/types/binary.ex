@@ -2,9 +2,11 @@ defmodule ExUnitAssertMatch.Types.Binary do
   defstruct []
 
   def assert_self(%__MODULE__{}, data, opts) do
-    {assertion_module, _opts} = Keyword.pop(opts, :assertion_module, ExUnit.Assertions)
+    message = ExUnitAssertMatch.ErrorMessage.build("Expected #{inspect(data)} is binary", opts)
 
-    data |> is_binary() |> assertion_module.assert("Expected #{inspect(data)} is binary")
+    data
+    |> is_binary()
+    |> opts.assertion_module.assert(message)
   end
 end
 

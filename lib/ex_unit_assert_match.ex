@@ -5,8 +5,14 @@ defmodule ExUnitAssertMatch do
 
   alias ExUnitAssertMatch.Types
 
-  def assert(type, data, opts \\ []) do
+  def assert(type, data, opts \\ [])
+
+  def assert(type, data, opts = %ExUnitAssertMatch.Option{}) do
     ExUnitAssertMatch.Type.assert(type, data, opts)
+  end
+
+  def assert(type, data, opts) do
+    assert(type, data, struct(ExUnitAssertMatch.Option, opts))
   end
 
   def map() do

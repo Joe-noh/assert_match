@@ -2,15 +2,21 @@ defmodule ExUnitAssertMatch.Types.List do
   defstruct [:example]
 
   def assert_self(%__MODULE__{}, data, opts) do
-    {assertion_module, _opts} = Keyword.pop(opts, :assertion_module, ExUnit.Assertions)
+    message = ExUnitAssertMatch.ErrorMessage.build("Expected #{inspect(data)} is list", opts)
 
-    data |> is_list() |> assertion_module.assert("Expected #{inspect(data)} is list")
+    data
+    |> is_list()
+    |> opts.assertion_module.assert(message)
   end
 
   def assert_children(%__MODULE__{example: nil}, _data, _opts) do
   end
+
   def assert_children(%__MODULE__{example: example}, data, opts) do
-    Enum.each(data, fn elem ->
+    data
+    |> Enum.with_index()
+    |> Enum.each(fn {elem, index} ->
+      opts = %ExUnitAssertMatch.Option{opts | key_stack: [index | opts.key_stack]}
       ExUnitAssertMatch.assert(example, elem, opts)
     end)
   end
