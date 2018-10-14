@@ -57,11 +57,29 @@ defmodule ExUnitAssertMatch do
     %Types.Nullable{example: example}
   end
 
-  def nillable(example) do
-    nullable(example)
-  end
-
   def any() do
     %Types.Any{}
   end
+
+  Enum.each(~w[map list atom binary integer float]a, fn type ->
+    name = String.to_atom("nullable_" <> to_string(type))
+
+    @doc """
+    Helper function to call `nullable(#{type}())`.
+    """
+    def unquote(name)() do
+      nullable(unquote(type)())
+    end
+  end)
+
+  Enum.each(~w[map list_of literal]a, fn type ->
+    name = String.to_atom("nullable_" <> to_string(type))
+
+    @doc """
+    Helper function to call `nullable(#{type}(example))`.
+    """
+    def unquote(name)(example) do
+      nullable(unquote(type)(example))
+    end
+  end)
 end
