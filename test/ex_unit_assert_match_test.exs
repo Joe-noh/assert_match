@@ -36,6 +36,15 @@ defmodule ExUnitAssertMatchTest do
     })
   end
 
-  describe "aliases" do
+  test "aliases" do
+    assert M.nullable_atom() == M.nullable(M.atom())
+    assert M.nullable_binary() == M.nullable(M.binary())
+    assert M.nullable_integer() == M.nullable(M.integer())
+    assert M.nullable_float() == M.nullable(M.float())
+    assert M.nullable_map() == M.nullable(M.map())
+    assert M.nullable_list() == M.nullable(M.list())
+    assert M.nullable_map(M.atom()) == M.nullable(M.map(M.atom()))
+    assert M.nullable_list_of(M.atom()) == M.nullable(M.list_of(M.atom()))
+    assert M.nullable_literal("Hello") == M.nullable(M.literal("Hello"))
   end
 end
