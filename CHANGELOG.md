@@ -1,4 +1,4 @@
-## 0.2.0 WIP
+## 0.2.0
 
 - Support nullable
 - Add `nullable_xxx` helpers
