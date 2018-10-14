@@ -35,4 +35,10 @@ defmodule ExUnitAssertMatchTest do
       ]
     })
   end
+
+  describe "aliases" do
+    test "nullable is nillable" do
+      assert M.nullable(M.integer()) == M.nillable(M.integer())
+    end
+  end
 end
