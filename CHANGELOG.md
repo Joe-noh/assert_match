@@ -2,6 +2,7 @@
 
 - Support nullable
 - Add `nullable_xxx` helpers
+- Add `equal` which is alias of `literal`
 
 ## 0.1.0
 

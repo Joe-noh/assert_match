@@ -37,6 +37,7 @@ defmodule ExUnitAssertMatchTest do
   end
 
   test "aliases" do
+    assert M.literal("Hello") == M.equal("Hello")
     assert M.nullable_atom() == M.nullable(M.atom())
     assert M.nullable_binary() == M.nullable(M.binary())
     assert M.nullable_integer() == M.nullable(M.integer())
