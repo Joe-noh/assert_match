@@ -53,6 +53,10 @@ defmodule ExUnitAssertMatch do
     %Types.Literal{example: example}
   end
 
+  def nullable(example) do
+    %Types.Nullable{example: example}
+  end
+
   def any() do
     %Types.Any{}
   end
