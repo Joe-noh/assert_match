@@ -27,6 +27,7 @@ defmodule SomeTest do
     expected = Match.map %{
       first_name: Match.binary(),
       last_name: Match.any(),
+      nickname: Match.nullable(Match.binary()),
       age: Match.integer(),
       height: Match.float(),
       orgs: Match.list_of(Match.map %{
@@ -38,6 +39,7 @@ defmodule SomeTest do
     Match.assert(expected, %{
       first_name: "John",
       last_name: "Doe",
+      nickname: nil,
       age: 28,
       height: 172.5,
       orgs: [%{
