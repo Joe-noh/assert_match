@@ -18,7 +18,7 @@ defmodule ExUnitAssertMatchTest do
               name: M.binary()
             })
           )
-      })
+      }, exact_same_keys: true)
 
     M.assert(expected, %{
       first_name: "John",
