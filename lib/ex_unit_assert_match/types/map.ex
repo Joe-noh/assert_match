@@ -5,8 +5,17 @@ defmodule ExUnitAssertMatch.Types.Map do
 
   def assert_self(struct = %__MODULE__{example: example}, data, opts, state) do
     if struct.exact_same_keys do
-      message = ExUnitAssertMatch.ErrorMessage.build("Expected to have exact same keys", state)
-      opts.assertion_module.assert Map.keys(example) == Map.keys(data), message
+      example_keys = example |> Map.keys() |> Enum.sort()
+      data_keys = data |> Map.keys() |> Enum.sort()
+
+      message = ~s"""
+      #{ExUnitAssertMatch.ErrorMessage.build("Expected to have exact same keys", state)}
+
+      expected: #{inspect example_keys}
+      actual:   #{inspect data_keys}
+      """
+
+      opts.assertion_module.assert example_keys == data_keys, message
     end
 
     message = ExUnitAssertMatch.ErrorMessage.build("Expected #{inspect(data)} is map", state)

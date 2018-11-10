@@ -57,8 +57,8 @@ defmodule ExUnitAssertMatch do
       Match.assert Match.map(%{name: Match.binary()}, exact_same_keys: true), %{name: "Bob", age: 28}
       #=> fail
   """
-  def map(example) do
-    %Types.Map{example: example}
+  def map(example, opts \\ []) do
+    struct(Types.Map, Keyword.put(opts, :example, example))
   end
 
   @doc """
