@@ -1,3 +1,8 @@
+## 0.3.0
+
+- `binary` supports `regex` option
+- Add `exact_same_keys` option to `map/2`
+
 ## 0.2.0
 
 - Support nullable
