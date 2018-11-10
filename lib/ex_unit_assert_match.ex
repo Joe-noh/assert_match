@@ -5,7 +5,7 @@ defmodule ExUnitAssertMatch do
   The usage is on [README](./readme.html#usage).
   """
 
-  alias ExUnitAssertMatch.{Types, Option, InternalState}
+  alias ExUnitAssertMatch.{Type, Types, Option, InternalState}
 
   @doc """
   Assert that given `data` match `type` specification.
@@ -23,7 +23,7 @@ defmodule ExUnitAssertMatch do
   def assert(type, data, opts \\ [])
 
   def assert(type, data, opts = %Option{}) do
-    ExUnitAssertMatch.Type.assert(type, data, opts, %InternalState{})
+    Type.assert(type, data, opts, %InternalState{})
   end
 
   def assert(type, data, opts) do
@@ -31,7 +31,7 @@ defmodule ExUnitAssertMatch do
   end
 
   def assert(type, data, opts, state) do
-    ExUnitAssertMatch.Type.assert(type, data, opts, state)
+    Type.assert(type, data, opts, state)
   end
 
   @doc """
