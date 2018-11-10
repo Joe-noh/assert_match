@@ -51,6 +51,11 @@ defmodule ExUnitAssertMatch do
 
       Match.assert Match.map(%{name: Match.binary()}), %{name: nil}
       #=> fail
+
+  You can assert that the map and `example` have exact same keys.
+
+      Match.assert Match.map(%{name: Match.binary()}, exact_same_keys: true), %{name: "Bob", age: 28}
+      #=> fail
   """
   def map(example) do
     %Types.Map{example: example}
