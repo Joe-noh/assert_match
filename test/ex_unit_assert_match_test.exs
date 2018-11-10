@@ -15,7 +15,7 @@ defmodule ExUnitAssertMatchTest do
           M.list_of(
             M.map(%{
               id: M.atom(),
-              name: M.binary()
+              name: M.binary(regex: ~r/\w+/)
             })
           )
       }, exact_same_keys: true)

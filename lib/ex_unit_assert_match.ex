@@ -91,10 +91,18 @@ defmodule ExUnitAssertMatch do
   end
 
   @doc """
-  Matches any binary.
+  Matches any binary. You can pass regex.
+
+        alias ExUnitAssertMatch, as: Match
+
+        Match.assert Match.binary(), "foo"
+        #=> pass
+
+        Match.assert Match.binary(regex: ~r/bar/), "foo"
+        #=> fail
   """
-  def binary() do
-    %Types.Binary{}
+  def binary(opts \\ []) do
+    struct(Types.Binary, opts)
   end
 
   @doc """

@@ -19,4 +19,18 @@ defmodule ExUnitAssertMatch.Types.BinaryTest do
       assert {:error, _} = catch_throw(Type.assert(type, [:a], opts, state))
     end
   end
+
+  describe "regex" do
+    setup %{type: type} do
+      %{type: %Types.Binary{type | regex: ~r/a/}}
+    end
+
+    test "return true if it's binary and match the regex", %{type: type, opts: opts, state: state} do
+      Type.assert(type, "abc", opts, state)
+
+      opts = %Option{opts | assertion_module: ExUnitAssertMatch.ThrowTupleOnFail}
+      assert {:error, _} = catch_throw(Type.assert(type, "bb", opts, state))
+      assert {:error, _} = catch_throw(Type.assert(type, 1.0, opts, state))
+    end
+  end
 end
