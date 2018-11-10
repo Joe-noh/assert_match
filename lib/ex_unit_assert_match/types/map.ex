@@ -1,9 +1,14 @@
 defmodule ExUnitAssertMatch.Types.Map do
   @moduledoc false
 
-  defstruct [:example]
+  defstruct example: nil, exact_same_keys: false
 
-  def assert_self(%__MODULE__{}, data, opts, state) do
+  def assert_self(struct = %__MODULE__{example: example}, data, opts, state) do
+    if struct.exact_same_keys do
+      message = ExUnitAssertMatch.ErrorMessage.build("Expected to have exact same keys", state)
+      opts.assertion_module.assert Map.keys(example) == Map.keys(data), message
+    end
+
     message = ExUnitAssertMatch.ErrorMessage.build("Expected #{inspect(data)} is map", state)
 
     data
