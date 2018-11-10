@@ -1,9 +1,9 @@
 defmodule ExUnitAssertMatch.ErrorMessage do
   @moduledoc false
 
-  def build(base, opts) do
+  def build(base, state) do
     base
-    |> append_key_stack(opts.key_stack)
+    |> append_key_stack(state.key_stack)
   end
 
   defp append_key_stack(message, []) do

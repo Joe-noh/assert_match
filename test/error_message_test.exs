@@ -1,25 +1,25 @@
 defmodule ExUnitAssertMatch.ErrorMessageTest do
   use ExUnit.Case, async: true
 
-  alias ExUnitAssertMatch.{ErrorMessage, Option}
+  alias ExUnitAssertMatch.{ErrorMessage, InternalState}
 
   describe "build without stack" do
     setup do
-      %{opts: %Option{key_stack: []}}
+      %{state: %InternalState{key_stack: []}}
     end
 
-    test "return given message as is", %{opts: opts} do
-      assert ErrorMessage.build("something went wrong", opts) == "something went wrong"
+    test "return given message as is", %{state: state} do
+      assert ErrorMessage.build("something went wrong", state) == "something went wrong"
     end
   end
 
   describe "build with stack" do
     setup do
-      %{opts: %Option{key_stack: ["name", 1, :orgs]}}
+      %{state: %InternalState{key_stack: ["name", 1, :orgs]}}
     end
 
-    test "append keys", %{opts: opts} do
-      message = ErrorMessage.build("something went wrong", opts)
+    test "append keys", %{state: state} do
+      message = ErrorMessage.build("something went wrong", state)
 
       assert message =~ "something went wrong"
       assert message =~ ":orgs > 1 > \"name\""
