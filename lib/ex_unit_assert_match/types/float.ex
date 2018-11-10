@@ -3,8 +3,8 @@ defmodule ExUnitAssertMatch.Types.Float do
 
   defstruct []
 
-  def assert_self(%__MODULE__{}, data, opts) do
-    message = ExUnitAssertMatch.ErrorMessage.build("Expected #{inspect(data)} is float", opts)
+  def assert_self(%__MODULE__{}, data, opts, state) do
+    message = ExUnitAssertMatch.ErrorMessage.build("Expected #{inspect(data)} is float", state)
 
     data
     |> is_float()
@@ -13,7 +13,7 @@ defmodule ExUnitAssertMatch.Types.Float do
 end
 
 defimpl ExUnitAssertMatch.Type, for: ExUnitAssertMatch.Types.Float do
-  def assert(type, data, opts \\ []) do
-    ExUnitAssertMatch.Types.Float.assert_self(type, data, opts)
+  def assert(type, data, opts, state) do
+    ExUnitAssertMatch.Types.Float.assert_self(type, data, opts, state)
   end
 end
