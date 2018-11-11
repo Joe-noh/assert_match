@@ -1,63 +1,51 @@
 defmodule ExUnitAssertMatch.Types.MapTest do
   use ExUnit.Case, async: true
 
-  alias ExUnitAssertMatch.{Type, Types, Option, InternalState}
+  alias ExUnitAssertMatch, as: M
+
+  setup do
+    %{opts: [assertion_module: M.ThrowTupleOnFail]}
+  end
 
   describe "without example" do
     setup do
-      %{type: %Types.Map{}, opts: %Option{}, state: %InternalState{}}
+      %{type: M.map()}
     end
 
-    test "return true if it's map", %{type: type, opts: opts, state: state} do
-      Type.assert(type, %{}, opts, state)
-      Type.assert(type, %{a: 1}, opts, state)
+    test "return true if it's map", %{type: type, opts: opts} do
+      M.assert(type, %{}, opts)
+      M.assert(type, %{a: 1}, opts)
 
-      opts = %Option{opts | assertion_module: ExUnitAssertMatch.ThrowTupleOnFail}
-      assert {:error, _} = catch_throw(Type.assert(type, "1", opts, state))
-      assert {:error, _} = catch_throw(Type.assert(type, :map, opts, state))
+      assert {:error, _} = catch_throw(M.assert(type, "1", opts))
+      assert {:error, _} = catch_throw(M.assert(type, :map, opts))
     end
   end
 
   describe "with example" do
     setup do
-      type = %Types.Map{
-        example: %{
-          name: %Types.Binary{}
-        }
-      }
-
-      %{type: type, opts: %Option{}, state: %InternalState{}}
+      %{type: M.map(%{name: M.binary()})}
     end
 
-    test "fails if the element does not match", %{type: type, opts: opts, state: state} do
-      Type.assert(type, %{name: "John"}, opts, state)
+    test "fails if the element does not match", %{type: type, opts: opts} do
+      M.assert(type, %{name: "John"}, opts)
 
-      opts = %Option{opts | assertion_module: ExUnitAssertMatch.ThrowTupleOnFail}
-      assert {:error, _} = catch_throw(Type.assert(type, %{}, opts, state))
-      assert {:error, _} = catch_throw(Type.assert(type, %{name: :john}, opts, state))
-      assert {:error, _} = catch_throw(Type.assert(type, %{age: 28}, opts, state))
+      assert {:error, _} = catch_throw(M.assert(type, %{}, opts))
+      assert {:error, _} = catch_throw(M.assert(type, %{name: :john}, opts))
+      assert {:error, _} = catch_throw(M.assert(type, %{age: 28}, opts))
     end
   end
 
   describe "with example and exact_same_keys: true" do
     setup do
-      type = %Types.Map{
-        example: %{
-          name: %Types.Binary{}
-        },
-        exact_same_keys: true,
-      }
-
-      %{type: type, opts: %Option{}, state: %InternalState{}}
+      %{type: M.map(%{name: M.binary()}, exact_same_keys: true)}
     end
 
-    test "fails if there are extra keys", %{type: type, opts: opts, state: state} do
-      Type.assert(type, %{name: "John"}, opts, state)
+    test "fails if there are extra keys", %{type: type, opts: opts} do
+      M.assert(type, %{name: "John"}, opts)
 
-      opts = %Option{opts | assertion_module: ExUnitAssertMatch.ThrowTupleOnFail}
-      assert {:error, _} = catch_throw(Type.assert(type, %{}, opts, state))
-      assert {:error, _} = catch_throw(Type.assert(type, %{name: :john}, opts, state))
-      assert {:error, _} = catch_throw(Type.assert(type, %{name: "John", age: 28}, opts, state))
+      assert {:error, _} = catch_throw(M.assert(type, %{}, opts))
+      assert {:error, _} = catch_throw(M.assert(type, %{name: :john}, opts))
+      assert {:error, _} = catch_throw(M.assert(type, %{name: "John", age: 28}, opts))
     end
   end
 end
