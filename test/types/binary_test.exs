@@ -1,36 +1,38 @@
 defmodule ExUnitAssertMatch.Types.BinaryTest do
   use ExUnit.Case, async: false
 
-  alias ExUnitAssertMatch.{Type, Types, Option, InternalState}
+  alias ExUnitAssertMatch, as: M
 
   setup do
-    %{type: %Types.Binary{}, opts: %Option{}, state: %InternalState{}}
+    %{opts: [assertion_module: M.ThrowTupleOnFail]}
   end
 
   describe "assert" do
-    test "return true if it's binary", %{type: type, opts: opts, state: state} do
-      Type.assert(type, "abc", opts, state)
-      Type.assert(type, "", opts, state)
-      Type.assert(type, <<123, 456>>, opts, state)
+    setup do
+      %{type: M.binary()}
+    end
 
-      opts = %Option{opts | assertion_module: ExUnitAssertMatch.ThrowTupleOnFail}
-      assert {:error, _} = catch_throw(Type.assert(type, 1, opts, state))
-      assert {:error, _} = catch_throw(Type.assert(type, 1.0, opts, state))
-      assert {:error, _} = catch_throw(Type.assert(type, [:a], opts, state))
+    test "return true if it's binary", %{type: type, opts: opts} do
+      M.assert(type, "abc", opts)
+      M.assert(type, "", opts)
+      M.assert(type, <<123, 456>>, opts)
+
+      assert {:error, _} = catch_throw(M.assert(type, 1, opts))
+      assert {:error, _} = catch_throw(M.assert(type, 1.0, opts))
+      assert {:error, _} = catch_throw(M.assert(type, [:a], opts))
     end
   end
 
-  describe "regex" do
-    setup %{type: type} do
-      %{type: %Types.Binary{type | regex: ~r/a/}}
+  describe "assert with regex" do
+    setup do
+      %{type: M.binary(regex: ~r/a/)}
     end
 
-    test "return true if it's binary and match the regex", %{type: type, opts: opts, state: state} do
-      Type.assert(type, "abc", opts, state)
+    test "return true if it's binary and match the regex", %{type: type, opts: opts} do
+      M.assert(type, "abc", opts)
 
-      opts = %Option{opts | assertion_module: ExUnitAssertMatch.ThrowTupleOnFail}
-      assert {:error, _} = catch_throw(Type.assert(type, "bb", opts, state))
-      assert {:error, _} = catch_throw(Type.assert(type, 1.0, opts, state))
+      assert {:error, _} = catch_throw(M.assert(type, "bb", opts))
+      assert {:error, _} = catch_throw(M.assert(type, 1.0, opts))
     end
   end
 end

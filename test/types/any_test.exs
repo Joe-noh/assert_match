@@ -1,20 +1,16 @@
 defmodule ExUnitAssertMatch.Types.AnyTest do
   use ExUnit.Case, async: false
 
-  alias ExUnitAssertMatch.{Type, Types, Option, InternalState}
-
-  setup do
-    %{type: %Types.Any{}, opts: %Option{}, state: %InternalState{}}
-  end
+  alias ExUnitAssertMatch, as: M
 
   describe "assert" do
-    test "always pass", %{type: type, opts: opts, state: state} do
-      Type.assert(type, "abc", opts, state)
-      Type.assert(type, 123, opts, state)
-      Type.assert(type, 3.14, opts, state)
-      Type.assert(type, %{}, opts, state)
-      Type.assert(type, [1, 2, 3], opts, state)
-      Type.assert(type, :atom, opts, state)
+    test "always pass" do
+      M.assert(M.any(), "abc")
+      M.assert(M.any(), 123)
+      M.assert(M.any(), 3.14)
+      M.assert(M.any(), %{})
+      M.assert(M.any(), [1, 2, 3])
+      M.assert(M.any(), :atom)
     end
   end
 end

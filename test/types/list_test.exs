@@ -1,36 +1,36 @@
 defmodule ExUnitAssertMatch.Types.ListTest do
   use ExUnit.Case, async: true
 
-  alias ExUnitAssertMatch.{Type, Types, Option, InternalState}
+  alias ExUnitAssertMatch, as: M
+
+  setup do
+    %{opts: [assertion_module: M.ThrowTupleOnFail]}
+  end
 
   describe "without example" do
     setup do
-      %{type: %Types.List{}, opts: %Option{}, state: %InternalState{}}
+      %{type: M.list()}
     end
 
-    test "return true if it's list", %{type: type, opts: opts, state: state} do
-      Type.assert(type, [], opts, state)
-      Type.assert(type, [1, 2, 3], opts, state)
+    test "return true if it's list", %{type: type, opts: opts} do
+      M.assert(type, [], opts)
+      M.assert(type, [1, 2, 3], opts)
 
-      opts = %Option{opts | assertion_module: ExUnitAssertMatch.ThrowTupleOnFail}
-      assert {:error, _} = catch_throw(Type.assert(type, "1", opts, state))
-      assert {:error, _} = catch_throw(Type.assert(type, :list, opts, state))
+      assert {:error, _} = catch_throw(M.assert(type, "1", opts))
+      assert {:error, _} = catch_throw(M.assert(type, :list, opts))
     end
   end
 
   describe "with example" do
     setup do
-      type = %Types.List{example: %Types.Binary{}}
-
-      %{type: type, opts: %Option{}, state: %InternalState{}}
+      %{type: M.list_of(M.binary())}
     end
 
-    test "fails if the element does not match", %{type: type, opts: opts, state: state} do
-      Type.assert(type, [], opts, state)
-      Type.assert(type, ["a", "b", "c"], opts, state)
+    test "fails if the element does not match", %{type: type, opts: opts} do
+      M.assert(type, [], opts)
+      M.assert(type, ["a", "b", "c"], opts)
 
-      opts = %Option{opts | assertion_module: ExUnitAssertMatch.ThrowTupleOnFail}
-      assert {:error, _} = catch_throw(Type.assert(type, [1, 2, 3], opts, state))
+      assert {:error, _} = catch_throw(M.assert(type, [1, 2, 3], opts))
     end
   end
 end

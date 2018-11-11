@@ -1,22 +1,25 @@
 defmodule ExUnitAssertMatch.Types.AtomTest do
   use ExUnit.Case, async: false
 
-  alias ExUnitAssertMatch.{Type, Types, Option, InternalState}
+  alias ExUnitAssertMatch, as: M
 
   setup do
-    %{type: %Types.Atom{}, opts: %Option{}, state: %InternalState{}}
+    %{opts: [assertion_module: M.ThrowTupleOnFail]}
   end
 
   describe "assert" do
-    test "pass if atom is given", %{type: type, opts: opts, state: state} do
-      Type.assert(type, :atom, opts, state)
-      Type.assert(type, :"hello world", opts, state)
-      Type.assert(type, Elixir, opts, state)
+    setup do
+      %{type: M.atom()}
+    end
 
-      opts = %Option{opts | assertion_module: ExUnitAssertMatch.ThrowTupleOnFail}
-      assert {:error, _} = catch_throw(Type.assert(type, 'abc', opts, state))
-      assert {:error, _} = catch_throw(Type.assert(type, 1.0, opts, state))
-      assert {:error, _} = catch_throw(Type.assert(type, [:a], opts, state))
+    test "pass if atom is given", %{type: type, opts: opts} do
+      M.assert(type, :atom, opts)
+      M.assert(type, :"hello world", opts)
+      M.assert(type, Elixir, opts)
+
+      assert {:error, _} = catch_throw(M.assert(type, 'abc', opts))
+      assert {:error, _} = catch_throw(M.assert(type, 1.0, opts))
+      assert {:error, _} = catch_throw(M.assert(type, [:a], opts))
     end
   end
 end
